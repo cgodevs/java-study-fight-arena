@@ -1,5 +1,5 @@
 
-public class Shotgun extends Gun implements ItemStatus{
+public class Shotgun extends Gun implements Deteriorable{
 
 	public Shotgun(int bullets, int cartridges) {		
 		super(bullets, cartridges);
@@ -20,6 +20,11 @@ public class Shotgun extends Gun implements ItemStatus{
 	@Override
 	public void deteriorate() {
 		super.durability -= super.durability * 0.1; 		
+	}
+	
+	@Override
+	public void restore() {
+		this.durability = 100;
 	}
 
 	@Override  // Got to override so deteriorate() can be used

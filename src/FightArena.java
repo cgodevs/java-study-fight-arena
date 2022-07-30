@@ -16,6 +16,13 @@ public class FightArena {
 		((Gun) charlie.currentWeapon).reload();
 		charlie.attack(zombie1, 7); // Wears up durability before using all bullets available
 		
+		Blacksmith bm = new Blacksmith();
+		bm.repair((Deteriorable)charlie.currentWeapon);
+		
+		charlie.attack(zombie1, 16);
+		
+				
+		
 		//System.out.println("\nDurability is " + charlie.currentWeapon.durability); //SHOW DURABILITY		
 		//System.out.println((Gun) charlie.currentWeapon.bulletsAvailable + " bullets left.\n"); //SHOW BULLETS LEFT	
 		

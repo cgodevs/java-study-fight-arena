@@ -1,5 +1,5 @@
 
-public abstract class Rifle extends Gun implements ItemStatus{
+public abstract class Rifle extends Gun implements Deteriorable{
 
 	public Rifle(int bullets, int cartridges) {
 		super(bullets, cartridges);
@@ -20,6 +20,10 @@ public abstract class Rifle extends Gun implements ItemStatus{
 	// REQUIRED by ItemStatus Interface
 	public void deteriorate() {  // fastest deteriorating type of gun!
 		super.durability -= super.durability * 0.3; 
+	}
+	
+	public void restore() {
+		this.durability = 100;
 	}
 	
 	@Override  // Got to override so deteriorate() can be used

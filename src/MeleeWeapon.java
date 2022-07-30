@@ -1,5 +1,5 @@
 
-public abstract class MeleeWeapon extends Weapon implements ItemStatus {	
+public abstract class MeleeWeapon extends Weapon implements Deteriorable {	
 	
 	public abstract void sound();
 	
@@ -7,6 +7,11 @@ public abstract class MeleeWeapon extends Weapon implements ItemStatus {
 	@Override
 	public void deteriorate() { 
 		this.durability -= this.durability * 0.3; // melee weapons deteriorate a lot faster!
+	}
+	
+	@Override
+	public void restore() {
+		this.durability = 100;
 	}
 	
 	// REQUIRED by Superclass Weapon
