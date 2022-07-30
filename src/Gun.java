@@ -18,15 +18,13 @@ public abstract class Gun {		//abstract Class will not allow a generic object in
 		}
 	}
 	
-	public boolean reload() {
+	public void reload() {
 		if (this.numberOfCartridgesAvailable > 0) {
 			System.out.println("Reloading...");
 			this.numberOfCartridgesAvailable--;
 			this.numberOfBulletsAvailable = this.ammoCapacity;
-			return true;
 		} else {
 			System.out.println("No cartridges left in this gun. Reloading not available.");
-			return false;
 		}
 	}
 }
