@@ -1,29 +1,24 @@
 public class Human {
 	private int numberOfWeapons = 0;
-	Gun currentGun;  // Pistol or ShotGun
-	
+	public Weapon currentWeapon;  // Guns or Melee Weapons	
 	public int getNumberOfWeapons() {
 		return this.numberOfWeapons;
 	}
 
-	// TAKES POLIMORFISM!! 
-	  public void pickUpGun(Gun gun) {
-		  this.currentGun = gun; 
-		  System.out.println("Picked up a " + this.currentGun.gunType + 
-				  " loaded with " + currentGun.numberOfBulletsAvailable + " bullets.");
+	// POLIMORFISM taken
+	  public void pickUpWeapon(Weapon weapon) {
+		  this.currentWeapon = weapon; 
+		  System.out.println("Picked up a " + weapon.type);
 		  this.numberOfWeapons++; 
-	  }
-	 
+	  }	 
 
-	public void switchGun() {
-		if (this.numberOfWeapons == 0) {
-			System.out.println("No weapons left.");
-		}
-	}
-
-	public void shoot(Zombie zombie, int numberOfTimes) {
+	public void switchGun(Weapon weapon) {
+		this.currentWeapon = weapon;
+	}		
+	
+	public void attack(Zombie zombie, int numberOfTimes) {
 		for (int i = 0; i < numberOfTimes; i++) {
-			boolean strike = currentGun.shoot();
+			boolean strike = currentWeapon.action();
 			if (strike) {
 				zombie.shotsTaken++;
 			} else { // Out of bullets!

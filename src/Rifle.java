@@ -1,11 +1,10 @@
 
-public class Rifle extends Gun {
+public abstract class Rifle extends Gun {
 
 	public Rifle(int bullets, int cartridges) {
-		super.gunType = "rifle";
-		super.numberOfBulletsAvailable = bullets;
-		super.numberOfCartridgesAvailable = cartridges;
-		super.ammoCapacity = 30;
+		super(bullets, cartridges);
+		super.type = "rifle";
+		super.magazineSize = 30;
 	}
 	
 	public Rifle() {
@@ -18,14 +17,17 @@ public class Rifle extends Gun {
 	}
 	
 	@Override
-	public boolean shoot() {
-		if (this.numberOfBulletsAvailable > 0) {
-			sound();
-			this.numberOfBulletsAvailable -= 2;
+	public void deteriorate() {  // deteriorates faster!
+		super.durability -= super.durability * 0.3; 
+	}
+	
+	@Override
+	public boolean action() {
+		super.action();
+		if (this.bulletsAvailable > 0) {
+			this.bulletsAvailable--; // Rifles shoot twice (for some reason)
 			return true;
-		} else {
-			System.out.println("No bullets left in this gun.");
-			return false;
-		}
+		} 
+		return false;
 	}
 }
