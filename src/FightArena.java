@@ -10,7 +10,7 @@ public class FightArena {
 		//System.out.println(Zombie.totalZombies); //Test static attribute
 		
 		Human charlie = new Human();
-		charlie.pickUpWeapon(new TacticalRifle());					
+		charlie.pickUpWeapon(new MarksmanRifle());					
 		
 		charlie.attack(zombie1, 16); //tries to use 32 bullets, can only use available magazine with capacity of 30 rounds
 		((Gun) charlie.currentWeapon).reload();

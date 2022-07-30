@@ -1,4 +1,6 @@
 
 public abstract interface ItemStatus { 
-	public abstract void deteriorate(); //all weapons deteriorate, what changes durability, some weapons will deteriorate faster;
+	public abstract void deteriorate(); 
+	//Deterioration changes durability, some items will deteriorate faster; 
+	// NOT all items deteriorate. This concept help implementing the correct use of Interfaces
 }

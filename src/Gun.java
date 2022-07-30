@@ -1,5 +1,6 @@
 
-public abstract class Gun extends Weapon implements ItemStatus{		//abstract Class will not allow a generic object instantiation (in "FightArena.java") 
+//abstract Class will not allow a generic object instantiation (in "FightArena.java")
+public abstract class Gun extends Weapon{  
 	protected int bulletsAvailable; //protected attributes are available only to children
 	protected int cartridgesAvailable;
 	protected int magazineSize;
@@ -14,12 +15,6 @@ public abstract class Gun extends Weapon implements ItemStatus{		//abstract Clas
 	
 	public abstract void sound();
 	
-	// REQUIRED by ItemStatus Interface
-	@Override
-	public void deteriorate() {
-		this.durability -= this.durability * 0.1;
-	}
-	
 	// REQUIRED by Superclass Weapon
 	@Override
 	public boolean action() {
@@ -29,8 +24,7 @@ public abstract class Gun extends Weapon implements ItemStatus{		//abstract Clas
 			}
 		if (this.bulletsAvailable > 0) {
 			sound();
-			this.bulletsAvailable--;
-			deteriorate();
+			this.bulletsAvailable--;			
 			return true;
 		} else {
 			System.out.println("\nNo bullets left in this gun. Shooting not available.\n");

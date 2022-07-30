@@ -1,5 +1,5 @@
 
-public abstract class Rifle extends Gun {
+public abstract class Rifle extends Gun implements ItemStatus{
 
 	public Rifle(int bullets, int cartridges) {
 		super(bullets, cartridges);
@@ -11,23 +11,25 @@ public abstract class Rifle extends Gun {
 		this(30,1);
 	}
 
+	// REQUIRED by Superclass Gun	
 	@Override
 	public void sound() {
 		System.out.print("pewpew! ");
 	}
 	
-	@Override
-	public void deteriorate() {  // deteriorates faster!
+	// REQUIRED by ItemStatus Interface
+	public void deteriorate() {  // fastest deteriorating type of gun!
 		super.durability -= super.durability * 0.3; 
 	}
 	
-	@Override
+	@Override  // Got to override so deteriorate() can be used
 	public boolean action() {
-		super.action();
-		if (this.bulletsAvailable > 0) {
+		if (super.action()) {
 			this.bulletsAvailable--; // Rifles shoot twice (for some reason)
+			deteriorate();
 			return true;
-		} 
+		}
 		return false;
 	}
+		
 }

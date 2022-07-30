@@ -1,7 +1,6 @@
 
 public abstract class Weapon {
 	protected String type;
-	protected double durability = 100;
-	protected abstract void deteriorate();
+	protected double durability = 100;	
 	public abstract boolean action();
 }
