@@ -1,13 +1,15 @@
 
-public abstract class Gun {		//abstract Class will not allow a generic object instantiation 
+public abstract class Gun {		//abstract Class will not allow a generic object instantiation (in "FightArena.java") 
 	String gunType;
-	public int numberOfBulletsAvailable;
-	public int numberOfCartridgesAvailable;
-	public int ammoCapacity;
+	protected int numberOfBulletsAvailable; //protected attributes are available only to children
+	protected int numberOfCartridgesAvailable;
+	protected int ammoCapacity;
+	
+	public abstract void sound();
 	
 	public boolean shoot() {
 		if (this.numberOfBulletsAvailable > 0) {
-			System.out.print("PEW! ");
+			sound();
 			this.numberOfBulletsAvailable--;
 			return true;
 		} else {
@@ -23,7 +25,7 @@ public abstract class Gun {		//abstract Class will not allow a generic object in
 			this.numberOfBulletsAvailable = this.ammoCapacity;
 			return true;
 		} else {
-			System.out.println("No cartridges left in this gun.");
+			System.out.println("No cartridges left in this gun. Reloading not available.");
 			return false;
 		}
 	}

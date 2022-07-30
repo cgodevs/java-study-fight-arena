@@ -9,6 +9,8 @@ public class Human {
 	// TAKES POLIMORFISM!! 
 	  public void pickUpGun(Gun gun) {
 		  this.currentGun = gun; 
+		  System.out.println("Picked up a " + this.currentGun.gunType + 
+				  " loaded with " + currentGun.numberOfBulletsAvailable + " bullets.");
 		  this.numberOfWeapons++; 
 	  }
 	 

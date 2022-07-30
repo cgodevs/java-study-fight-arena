@@ -10,20 +10,19 @@ public class FightArena {
 		//System.out.println(Zombie.totalZombies); //Test static attribute
 		
 		Human charlie = new Human();
-		charlie.pickUpGun(new Pistol());		
+		charlie.pickUpGun(new Pistol());					
 		
-		System.out.println(charlie.currentGun.gunType);	
-		System.out.println(charlie.currentGun.numberOfBulletsAvailable + " bullets left");		
-		charlie.shoot(zombie1, 2);
-		System.out.println(charlie.currentGun.numberOfBulletsAvailable + " bullets left");
-		charlie.shoot(zombie1, 10);
-		System.out.println(charlie.currentGun.numberOfBulletsAvailable + " bullets left");
-		charlie.currentGun.reload();
-		System.out.println(charlie.currentGun.numberOfBulletsAvailable + " bullets left");
-		System.out.println(zombie1.shotsTaken);
+		charlie.shoot(zombie1, 10);		
+		System.out.println(charlie.currentGun.numberOfBulletsAvailable + " bullets left.\n");
 		
-		System.out.println(Zombie.getTotalZombies());
+		charlie.shoot(zombie1, 20);		
+		System.out.println(charlie.currentGun.numberOfBulletsAvailable + " bullets left.\n");		
 		
+		charlie.currentGun.reload();		
+		System.out.println(charlie.currentGun.numberOfBulletsAvailable + " bullets left.\n");
+		
+		//System.out.println(zombie1.shotsTaken);		
+		//System.out.println(Zombie.getTotalZombies());		
 
 	}
 

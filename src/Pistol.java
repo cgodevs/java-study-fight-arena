@@ -2,14 +2,20 @@
 public class Pistol extends Gun {
 
 	public Pistol(int bullets, int cartridges) {
-		this.gunType = "pistol";
-		this.numberOfBulletsAvailable = bullets;
-		this.numberOfCartridgesAvailable = cartridges;
-		this.ammoCapacity = 17;
+		super.gunType = "pistol";
+		super.numberOfBulletsAvailable = bullets;
+		super.numberOfCartridgesAvailable = cartridges;
+		super.ammoCapacity = 17;
 	}
 	
 	public Pistol() {
 		this(17, 2);
+	}
+
+	@Override
+	public void sound() {
+		System.out.print("pew! ");
+		
 	}
 
 }
