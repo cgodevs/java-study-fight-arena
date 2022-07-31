@@ -4,11 +4,11 @@ public abstract class Rifle extends Gun implements Deteriorable{
 	public Rifle(int bullets, int cartridges) {
 		super(bullets, cartridges);
 		super.type = "rifle";
-		super.magazineSize = 30;
+		super.magazineSize = GunSpecs.RIFLE.getMagazineCap();
 	}
 	
 	public Rifle() {
-		this(30,1);
+		this(GunSpecs.RIFLE.getMagazineCap(), GunSpecs.RIFLE.getCartridges());
 	}
 
 	// REQUIRED by Superclass Gun	

@@ -7,11 +7,11 @@ public class Pistol extends Gun {
 		//super.numberOfBulletsAvailable = bullets; // Attributes are implicitly stated by the line above
 		//super.numberOfCartridgesAvailable = cartridges; // Attributes are implicitly stated by the line above		
 		super.type = "pistol";
-		super.magazineSize = 17;
+		super.magazineSize = GunSpecs.PISTOL.getMagazineCap();
 	}
 	
 	public Pistol() {
-		this(17, 2);
+		this(GunSpecs.PISTOL.getMagazineCap(), GunSpecs.PISTOL.getCartridges());
 	}
 	
 	@Override

@@ -4,11 +4,11 @@ public class Shotgun extends Gun implements Deteriorable{
 	public Shotgun(int bullets, int cartridges) {		
 		super(bullets, cartridges);
 		super.type = "shotgun";
-		super.magazineSize = 12;
+		super.magazineSize = GunSpecs.SHOTGUN.getMagazineCap();
 	}
 	
 	public Shotgun() {
-		this(12, 2);
+		this(GunSpecs.SHOTGUN.getMagazineCap(), GunSpecs.SHOTGUN.getCartridges());
 	}
 
 	@Override
