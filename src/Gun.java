@@ -19,7 +19,7 @@ public abstract class Gun extends Weapon{
 	@Override
 	public boolean action() {
 		if (this.durability <= 0.1) {
-			System.out.println("Weapon is broke. No damage inflicted.");
+			System.out.println("Weapon is broke. No damage inflicted.\n");
 			return false;
 			}
 		if (this.bulletsAvailable > 0) {
@@ -32,13 +32,26 @@ public abstract class Gun extends Weapon{
 		}		
 	}
 	
-	public void reload() {
+	public void reload() throws CartridgesNotAvailable { // method reloads 1 cartridge
 		if (this.cartridgesAvailable > 0) {
-			System.out.println("Reloading... " + this.magazineSize + " bullets reloaded.");
+			System.out.println("Reloading... " + this.magazineSize + " bullets reloaded.\n");
 			this.cartridgesAvailable--;
-			this.bulletsAvailable = this.magazineSize;
+			this.bulletsAvailable = this.magazineSize;					
 		} else {
-			System.out.println("No cartridges left in this gun. Reloading not available.");
+			throw new CartridgesNotAvailable("No cartridges left in this gun. Reloading not available.\n");
 		}
 	}
+	
+	public void reload(int numberOfBullets) { // bullets not loaded into magazine are stored in cartridges
+		reload();
+		int bulletsToReload = numberOfBullets - this.magazineSize;
+		while (bulletsToReload >= this.magazineSize) {
+			this.cartridgesAvailable++;
+			bulletsToReload -= this.magazineSize;
+		}	
+	}
 }
+
+
+
+

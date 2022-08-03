@@ -9,3 +9,7 @@
 /Armor.class
 /Blacksmith.class
 /Deteriorable.class
+/OverLoad.class
+/BulletsOverLoad.class
+/CartridgesAvailable.class
+/CartridgesNotAvailable.class

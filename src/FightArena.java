@@ -13,7 +13,12 @@ public class FightArena {
 		charlie.pickUpWeapon(new MarksmanRifle());					
 		
 		charlie.attack(zombie1, 16); //tries to use 32 bullets, can only use available magazine with capacity of 30 rounds
-		((Gun) charlie.currentWeapon).reload();
+		try {
+			((Gun) charlie.currentWeapon).reload(100);
+		} catch (CartridgesNotAvailable ex) {
+			System.out.println(ex.getMessage());
+		}
+		
 		charlie.attack(zombie1, 7); // Wears up durability before using all bullets available
 		
 		Blacksmith bm = new Blacksmith();
