@@ -1,3 +1,5 @@
+package com.java.fightarena.abstractions;
+import com.java.fightarena.exceptions.*;
 
 //abstract Class will not allow a generic object instantiation (in "FightArena.java")
 public abstract class Gun extends Weapon{  

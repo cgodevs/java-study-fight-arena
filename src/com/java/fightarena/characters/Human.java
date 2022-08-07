@@ -1,3 +1,6 @@
+package com.java.fightarena.characters;
+import com.java.fightarena.abstractions.*;
+
 public class Human {
 	private int numberOfWeapons = 0;
 	public Weapon currentWeapon;  // Guns or Melee Weapons	
@@ -8,7 +11,7 @@ public class Human {
 	// POLIMORFISM taken
 	  public void pickUpWeapon(Weapon weapon) {
 		  this.currentWeapon = weapon; 
-		  System.out.println("Picked up a " + weapon.type);
+		  System.out.println("Picked up a " + weapon.getType());
 		  this.numberOfWeapons++; 
 	  }	 
 

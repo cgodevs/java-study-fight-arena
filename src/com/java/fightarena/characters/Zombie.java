@@ -1,3 +1,4 @@
+package com.java.fightarena.characters;
 
 public class Zombie {
 	int shotsTaken = 0;

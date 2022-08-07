@@ -13,3 +13,12 @@
 /BulletsOverLoad.class
 /CartridgesAvailable.class
 /CartridgesNotAvailable.class
+/item-interfaces/
+/item-abstracts/
+/enums/
+/guns/
+/exceptions/
+/melee/
+/characters/
+/weapons/
+/com/

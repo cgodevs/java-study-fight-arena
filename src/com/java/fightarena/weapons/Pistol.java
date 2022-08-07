@@ -1,3 +1,6 @@
+package com.java.fightarena.weapons;
+import com.java.fightarena.abstractions.*;
+import com.java.fightarena.enums.*;
 
 public class Pistol extends Gun {  
 	//TODO Pistols do not deteriorate (not using ItemStatus here), but deal less damage. To be implemented later on.

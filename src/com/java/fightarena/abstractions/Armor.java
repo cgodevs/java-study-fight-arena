@@ -1,3 +1,5 @@
+package com.java.fightarena.abstractions;
+import com.java.fightarena.interfaces.*;
 
 public abstract class Armor implements Deteriorable {
 	public double durability = 100;

@@ -1,3 +1,4 @@
+package com.java.fightarena.exceptions;
 
 public class CartridgesNotAvailable extends RuntimeException {
 

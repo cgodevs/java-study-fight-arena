@@ -1,3 +1,7 @@
+package com.java.fightarena.weapons;
+import com.java.fightarena.abstractions.*;
+import com.java.fightarena.enums.*;
+import com.java.fightarena.interfaces.*;
 
 public class Shotgun extends Gun implements Deteriorable{
 

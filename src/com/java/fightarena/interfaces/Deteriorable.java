@@ -1,3 +1,4 @@
+package com.java.fightarena.interfaces;
 
 //interfaces seem to work better when understood as abilities or capacities
 

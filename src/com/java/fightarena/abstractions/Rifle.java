@@ -1,3 +1,6 @@
+package com.java.fightarena.abstractions;
+import com.java.fightarena.interfaces.*;
+import com.java.fightarena.enums.*;
 
 public abstract class Rifle extends Gun implements Deteriorable{
 

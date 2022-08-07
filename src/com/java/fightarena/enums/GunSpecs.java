@@ -1,3 +1,4 @@
+package com.java.fightarena.enums;
 
 //holds magazineCapacity and initial number of cartridges available //Usage: GunSpecs.NAME.getMagazineCap()
 public enum GunSpecs { 

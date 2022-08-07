@@ -1,3 +1,5 @@
+package com.java.fightarena.weapons;
+import com.java.fightarena.abstractions.*;
 
 public class Axe extends MeleeWeapon{
 	

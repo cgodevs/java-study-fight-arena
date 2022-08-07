@@ -1,3 +1,5 @@
+package com.java.fightarena.abstractions;
+import com.java.fightarena.interfaces.*;
 
 public abstract class MeleeWeapon extends Weapon implements Deteriorable {	
 	

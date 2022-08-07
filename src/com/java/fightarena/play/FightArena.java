@@ -1,3 +1,9 @@
+package com.java.fightarena.play;
+import com.java.fightarena.characters.*;
+import com.java.fightarena.weapons.*;
+import com.java.fightarena.exceptions.*;
+import com.java.fightarena.interfaces.*;
+import com.java.fightarena.abstractions.*;
 
 public class FightArena {
 

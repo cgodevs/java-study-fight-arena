@@ -1,3 +1,4 @@
+package com.java.fightarena.abstractions;
 
 public abstract class Weapon {
 	protected String type;
@@ -6,5 +7,9 @@ public abstract class Weapon {
 	
 	public void restore() {
 		this.durability = 100;
+	}
+
+	public String getType() {
+		return type;
 	}
 }

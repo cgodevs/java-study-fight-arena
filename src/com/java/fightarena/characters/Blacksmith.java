@@ -1,3 +1,5 @@
+package com.java.fightarena.characters;
+import com.java.fightarena.interfaces.*;
 
 public class Blacksmith {
 	

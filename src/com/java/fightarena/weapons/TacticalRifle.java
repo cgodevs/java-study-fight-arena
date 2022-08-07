@@ -1,3 +1,6 @@
+package com.java.fightarena.weapons;
+import com.java.fightarena.abstractions.*;
+import com.java.fightarena.enums.*;
 
 public class TacticalRifle extends Rifle { // extends Rifle and Gun
 
