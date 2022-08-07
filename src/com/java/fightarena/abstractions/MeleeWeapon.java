@@ -1,6 +1,12 @@
 package com.java.fightarena.abstractions;
 import com.java.fightarena.interfaces.*;
 
+/**
+ * 
+ * The kind of weapons to hit or slash with, all make sound and deteriorate.
+ * @author caroline.oliveira
+ *
+ */
 public abstract class MeleeWeapon extends Weapon implements Deteriorable {	
 	
 	public abstract void sound();

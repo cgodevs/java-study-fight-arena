@@ -1,6 +1,12 @@
 package com.java.fightarena.abstractions;
 import com.java.fightarena.exceptions.*;
 
+/**
+ * The kind of weapon that shoots. Not all deteriorate and some shoot two bullets per shot.  
+ * @author caroline.oliveira
+ *
+ */
+
 //abstract Class will not allow a generic object instantiation (in "FightArena.java")
 public abstract class Gun extends Weapon{  
 	protected int bulletsAvailable; //protected attributes are available only to children

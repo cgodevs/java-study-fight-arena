@@ -1,4 +1,9 @@
 package com.java.fightarena.abstractions;
+/**
+ * Super class to all sort of weapons
+ * @author caroline.oliveira
+ * 
+ */
 
 public abstract class Weapon {
 	protected String type;

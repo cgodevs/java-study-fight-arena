@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.java.fightarena.abstractions"},{"l":"com.java.fightarena.characters"},{"l":"com.java.fightarena.enums"},{"l":"com.java.fightarena.exceptions"},{"l":"com.java.fightarena.interfaces"},{"l":"com.java.fightarena.play"},{"l":"com.java.fightarena.weapons"}];updateSearchResults();
