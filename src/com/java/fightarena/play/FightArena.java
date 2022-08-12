@@ -16,7 +16,8 @@ public class FightArena {
 		//System.out.println(Zombie.totalZombies); //Test static attribute
 		
 		Human charlie = new Human();
-		charlie.pickUpWeapon(new MarksmanRifle());					
+		charlie.pickUpWeapon(new MarksmanRifle());
+		System.out.println(charlie.toString());
 		
 		charlie.attack(zombie1, 16); //tries to use 32 bullets, can only use available magazine with capacity of 30 rounds
 		try {
@@ -29,6 +30,11 @@ public class FightArena {
 		
 		Blacksmith bm = new Blacksmith();
 		bm.repair((Deteriorable)charlie.currentWeapon);
+		
+		
+		System.out.println(charlie.toString());
+		System.out.println(zombie1.toString());	
+		
 		
 		charlie.attack(zombie1, 16);
 		

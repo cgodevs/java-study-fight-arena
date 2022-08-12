@@ -20,6 +20,17 @@ public class Zombie {
 		this.brainsEaten += numberOfBrains;
 		System.out.println(numberOfBrains + " brains eaten!");
 	}
+	
+	@Override
+	public String toString() {
+		return  "**********************\n" +
+				"Shots Taken: " + this.shotsTaken + "\n" +
+				"Brains Eaten: " + this.brainsEaten + "\n" +
+				"Stamina: " + this.stamina + "\n" +
+				"Total Zombies: " + Zombie.totalZombies +
+				"\n**********************\n";
+		//TODO return creation order of the object
+	}
 }
 
 

@@ -25,7 +25,9 @@ public class Human {
 			if (strike) {
 				zombie.shotsTaken++;
 			} else { // Out of bullets!
-				this.numberOfWeapons--;
+				if (this.numberOfWeapons != 0) {
+					this.numberOfWeapons--;
+				}
 				break; // remove to force human to use other gun(s) left
 				/*
 					if (this.numberOfWeapons > 0) {						
@@ -37,5 +39,13 @@ public class Human {
 					*/	
 				}
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return "**********************\n" +
+				"Number of Guns: " + this.numberOfWeapons + "\n" +
+				"Holding: " + this.currentWeapon.getType() +
+				"\n**********************\n";
 	}
 }
