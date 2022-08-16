@@ -7,7 +7,7 @@ public class Shotgun extends Gun implements Deteriorable{
 
 	public Shotgun(int bullets, int cartridges) {		
 		super(bullets, cartridges);
-		super.type = "shotgun";
+		super.type = "Shotgun";
 		super.magazineSize = GunSpecs.SHOTGUN.getMagazineCap();
 	}
 	

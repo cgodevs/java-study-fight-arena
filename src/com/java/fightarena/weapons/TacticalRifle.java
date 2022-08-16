@@ -6,7 +6,7 @@ public class TacticalRifle extends Rifle { // extends Rifle and Gun
 
 	public TacticalRifle(int bullets, int cartridges) {
 		super(bullets, cartridges);
-		super.type = "tactical rifle";
+		super.type = "Tactical Rifle";
 		super.magazineSize = 50;
 		super.magazineSize = GunSpecs.TACTICAL.getMagazineCap();
 	}

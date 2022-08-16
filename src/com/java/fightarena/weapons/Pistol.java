@@ -9,7 +9,7 @@ public class Pistol extends Gun {
 		super(bullets, cartridges); // The Parent Constructor is not inherited by default, so it's mandatory to recreate it in the Child Class		
 		//super.numberOfBulletsAvailable = bullets; // Attributes are implicitly stated by the line above
 		//super.numberOfCartridgesAvailable = cartridges; // Attributes are implicitly stated by the line above		
-		super.type = "pistol";
+		super.type = "Pistol";
 		super.magazineSize = GunSpecs.PISTOL.getMagazineCap();
 	}
 	
