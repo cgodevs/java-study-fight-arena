@@ -37,6 +37,6 @@ public abstract class MeleeWeapon extends Weapon implements Deteriorable {
 	
 	@Override
 	public String toString() {
-		return "[" + this.type + " | " + this.getDurability() + "%";
+		return "[" + this.type + " | " + this.getDurability() + "%]";
 	}
 }

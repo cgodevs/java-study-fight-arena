@@ -6,7 +6,7 @@ public class MarksmanRifle extends Rifle {  // extends Rifle and Gun
 
 	public MarksmanRifle(int bullets, int cartridges) {
 		super(bullets, cartridges);
-		super.type = "marksman rifle";	
+		super.type = "Marksman Rifle";	
 		super.magazineSize = GunSpecs.MARKSMAN.getMagazineCap();
 	}
 
