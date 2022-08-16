@@ -13,6 +13,13 @@ public abstract class Gun extends Weapon{
 	protected int cartridgesAvailable;
 	protected int magazineSize;
 	
+	public int getMagazineSize() {
+		return magazineSize;
+	}
+	public int getBulletsAvailable() {
+		return bulletsAvailable;
+	}
+
 	public Gun(int bullets, int cartridges) { //Constructor
 		this.bulletsAvailable = bullets;
 		this.cartridgesAvailable = cartridges;
@@ -41,22 +48,31 @@ public abstract class Gun extends Weapon{
 	}
 	
 	public void reload() throws CartridgesNotAvailable { // method reloads 1 cartridge
-		if (this.cartridgesAvailable > 0) {
-			System.out.println("Reloading... " + this.magazineSize + " bullets reloaded.\n");
-			this.cartridgesAvailable--;
-			this.bulletsAvailable = this.magazineSize;					
-		} else {
-			throw new CartridgesNotAvailable("No cartridges left in this gun. Reloading not available.\n");
-		}
+		if (this.bulletsAvailable < this.magazineSize) { // makes sense to reload only when there are less bullets than magazine size
+			if (this.cartridgesAvailable > 0) {
+				System.out.println("Reloading... " + this.magazineSize + " bullets reloaded.\n");
+				this.cartridgesAvailable--;
+				this.bulletsAvailable = this.magazineSize;					
+			} else {
+				throw new CartridgesNotAvailable("No cartridges left in this gun. Reloading not available.\n");
+			}
+		}		
 	}
 	
 	public void reload(int numberOfBullets) { // bullets not loaded into magazine are stored in cartridges
+		int bulletsToReachMagazineSize =  this.magazineSize - this.bulletsAvailable;
+		int bulletsForCartridges = numberOfBullets - bulletsToReachMagazineSize;
 		reload();
-		int bulletsToReload = numberOfBullets - this.magazineSize;
-		while (bulletsToReload >= this.magazineSize) {
+		
+		while (bulletsForCartridges >= this.magazineSize) { // fill up more cartridges with unused bullets
 			this.cartridgesAvailable++;
-			bulletsToReload -= this.magazineSize;
+			bulletsForCartridges -= this.magazineSize;
 		}	
+	}
+	
+	@Override
+	public String toString() {
+		return "[" + this.type + " | " + this.bulletsAvailable + " bullets, " + this.cartridgesAvailable + " cartridges]";
 	}
 }
 
