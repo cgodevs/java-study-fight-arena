@@ -7,7 +7,12 @@ package com.java.fightarena.abstractions;
 
 public abstract class Weapon {
 	protected String type;
-	public double durability = 100;	
+	protected double durability = 100;	
+	
+	public double getDurability() {
+		return durability;
+	}
+
 	public abstract boolean action();
 	
 	public void restore() {
