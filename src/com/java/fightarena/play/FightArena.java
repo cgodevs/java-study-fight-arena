@@ -44,14 +44,11 @@ public class FightArena {
 		guns.add(new TacticalRifle());
 		guns.add(new Shotgun());
 		
-		for (Gun gun : guns) {
-			System.out.println(gun);
-		}
+		guns.forEach(gun -> System.out.println(gun));		
 		System.out.println("------------");
+		
 		Collections.sort(guns);
-		for (Gun gun : guns) {
-			System.out.println(gun);
-		}
+		guns.forEach(gun -> System.out.println(gun));
 
 	}
 

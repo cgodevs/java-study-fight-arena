@@ -67,11 +67,9 @@ public class Human {
 
 	@Override
 	public String toString() {
-		StringBuilder allWeapons = new StringBuilder();
+		StringBuilder allWeapons = new StringBuilder();		
+		this.weapons.forEach((w) -> allWeapons.append("\n\t" + w)); 
 		
-		for(Weapon weapon: this.weapons) {
-			allWeapons.append("\n\t" + weapon); 
-		}
 		return "***************" + this.name + "*************\n" + 
 				"Number of weapons: " + this.weapons.size() + "\n" +
 				"Currently holding: "	+ this.getCurrentWeapon().getType() + "\n" +
