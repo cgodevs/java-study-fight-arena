@@ -8,7 +8,7 @@ import com.java.fightarena.exceptions.*;
  */
 
 //abstract Class will not allow a generic object instantiation (in "FightArena.java")
-public abstract class Gun extends Weapon{  
+public abstract class Gun extends Weapon implements Comparable<Gun>{  
 	protected int bulletsAvailable; //protected attributes are available only to children
 	protected int cartridgesAvailable;
 	protected int magazineSize;
@@ -70,6 +70,9 @@ public abstract class Gun extends Weapon{
 		}	
 	}
 	
+	public int compareTo(Gun g){
+		return Integer.compare(this.cartridgesAvailable * this.bulletsAvailable, g.cartridgesAvailable * g.bulletsAvailable) * (-1); //reverse order to present best guns for use top first
+	}
 	@Override
 	public String toString() {
 		return "[" + this.type + " | " + this.bulletsAvailable + " bullets, " + this.cartridgesAvailable + " cartridges]";
