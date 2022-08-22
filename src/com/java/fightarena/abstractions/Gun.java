@@ -12,6 +12,10 @@ public abstract class Gun extends Weapon implements Comparable<Gun>{
 	protected int bulletsAvailable; //protected attributes are available only to children
 	protected int cartridgesAvailable;
 	protected int magazineSize;
+
+	public int getCartridgesAvailable() {
+		return cartridgesAvailable;
+	}
 	
 	public int getMagazineSize() {
 		return magazineSize;
