@@ -1,5 +1,6 @@
 package com.java.fightarena.characters;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,6 +8,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Scanner;
 
 import com.java.fightarena.abstractions.Gun;
 import com.java.fightarena.abstractions.MeleeWeapon;
@@ -25,55 +28,61 @@ public class Player {
 	private ArrayList<Weapon> weapons = new ArrayList<>(4); // Only 4 weapons may be carried at a time
 
 	public Player() throws IOException { // tries to load or create player from console
-		InputStream in = null;
-		BufferedReader reader = null;
 		try {
-			in = new FileInputStream("gamestats.txt"); //format: <Name> <Level> <Current Weapon> <List Of Weapons>
-			reader = new BufferedReader(new InputStreamReader(in));
-			String[] playerStats = reader.readLine().split(",");
-			String[] currentWeaponStats = reader.readLine().split(",");
+			Scanner scanner = new Scanner(new File("gamestats.txt")); //format: <Name> <Level> <Current Weapon> <List Of Weapons>
 
 			//GET PLAYER INFO
-			this.name = playerStats[0];
-			this.level = Integer.parseInt(playerStats[1]);
-
+			Scanner playerStats = new Scanner(scanner.nextLine());
+			playerStats.useDelimiter(",");
+			this.name = playerStats.next();
+			this.level = playerStats.nextInt();
+			
 			//GET CURRENT WEAPON INFO
-			if (currentWeaponStats[0].compareTo("Gun") == 0) {
-				int currentWeaponBullets = Integer.parseInt(currentWeaponStats[3]);
-				int currentWeaponCartridges = Integer.parseInt(currentWeaponStats[4]);
-				switch(currentWeaponStats[1]) {
+			Scanner currentWeaponStats = new Scanner(scanner.nextLine());
+			currentWeaponStats.useLocale(Locale.US); // JVM is forced to use dots are decimals separators 
+			currentWeaponStats.useDelimiter(",");
+			String weaponType = currentWeaponStats.next();
+			String weaponName = currentWeaponStats.next();
+			double durability = currentWeaponStats.nextDouble();
+			
+			if (weaponType.compareTo("Gun") == 0) {
+				int bullets = currentWeaponStats.nextInt();
+				int cartridges = currentWeaponStats.nextInt();
+				switch(weaponName) {
 					case("Pistol"):
-						this.currentWeapon = new Pistol(currentWeaponBullets, currentWeaponCartridges);
+						setCurrentWeapon(new Pistol(bullets, cartridges));
 						break;
 					case("MarksMan Rifle"):
-						this.currentWeapon = new MarksmanRifle(currentWeaponBullets, currentWeaponCartridges);
+						setCurrentWeapon(new MarksmanRifle(bullets, cartridges));
 						break;
 					case("Shotgun"):
-						this.currentWeapon = new Shotgun(currentWeaponBullets, currentWeaponCartridges);
+						setCurrentWeapon(new Shotgun(bullets, cartridges));
 						break;
 					case("Tactical Rifle"):
-						this.currentWeapon = new TacticalRifle(currentWeaponBullets, currentWeaponCartridges);
+						setCurrentWeapon(new TacticalRifle(bullets, cartridges));
 						break;
 				}
 			} else {
-				switch(currentWeaponStats[1]) {
+				switch(weaponName) {
 					case("Axe"):
-						this.currentWeapon = new Axe();
+						setCurrentWeapon(new Axe());
 						break;
 				}
 			}
-			this.currentWeapon.setDurability(Double.parseDouble(currentWeaponStats[2]));
+			this.currentWeapon.setDurability(durability);
+			playerStats.close();			
+			currentWeaponStats.close();
+			scanner.close();
 
 		} catch(FileNotFoundException fnfex) {
-			in = System.in;
-			reader = new BufferedReader(new InputStreamReader(in));
-			this.name = reader.readLine();
+			Scanner scanner = new Scanner(System.in);
+			this.name = scanner.nextLine();
 			this.level = 1;
+			scanner.close();
+			setCurrentWeapon(new Pistol()); // Default weapon for game start
+			writeStatsToFile(); 
 		} finally {
-			this.pickUpWeapon(new Shotgun()); //TODO move to catch block when weapons are loaded from stats
-			writeStatsToFile(); //TODO move this too along with line above
-			in.close();
-			reader.close();
+			this.weapons.add(currentWeapon);
 		}
 	}
 
