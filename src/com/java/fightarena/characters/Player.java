@@ -1,25 +1,15 @@
 package com.java.fightarena.characters;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
-import com.java.fightarena.abstractions.Gun;
-import com.java.fightarena.abstractions.MeleeWeapon;
-import com.java.fightarena.abstractions.Weapon;
+import com.java.fightarena.abstractions.*;
 import com.java.fightarena.exceptions.FullSlotsException;
-import com.java.fightarena.weapons.Axe;
-import com.java.fightarena.weapons.MarksmanRifle;
-import com.java.fightarena.weapons.Pistol;
-import com.java.fightarena.weapons.Shotgun;
-import com.java.fightarena.weapons.TacticalRifle;
+import com.java.fightarena.weapons.*;
 
 public class Player {
 	private String name;
@@ -36,42 +26,47 @@ public class Player {
 			playerStats.useDelimiter(",");
 			this.name = playerStats.next();
 			this.level = playerStats.nextInt();
+			playerStats.close();
 			
 			//GET CURRENT WEAPON INFO
-			Scanner currentWeaponStats = new Scanner(scanner.nextLine());
-			currentWeaponStats.useLocale(Locale.US); // JVM is forced to use dots are decimals separators 
-			currentWeaponStats.useDelimiter(",");
-			String weaponType = currentWeaponStats.next();
-			String weaponName = currentWeaponStats.next();
-			double durability = currentWeaponStats.nextDouble();
-			
-			if (weaponType.compareTo("Gun") == 0) {
-				int bullets = currentWeaponStats.nextInt();
-				int cartridges = currentWeaponStats.nextInt();
-				switch(weaponName) {
-					case("Pistol"):
-						setCurrentWeapon(new Pistol(bullets, cartridges));
-						break;
-					case("MarksMan Rifle"):
-						setCurrentWeapon(new MarksmanRifle(bullets, cartridges));
-						break;
-					case("Shotgun"):
-						setCurrentWeapon(new Shotgun(bullets, cartridges));
-						break;
-					case("Tactical Rifle"):
-						setCurrentWeapon(new TacticalRifle(bullets, cartridges));
-						break;
+			while(scanner.hasNext()) {
+				Scanner oneWeaponStats = new Scanner(scanner.nextLine());
+				oneWeaponStats.useLocale(Locale.US); // JVM is forced to use dots as decimals separators 
+				oneWeaponStats.useDelimiter(",");
+				String weaponType = oneWeaponStats.next();
+				String weaponName = oneWeaponStats.next();
+				double durability = oneWeaponStats.nextDouble();
+				Weapon w = null;
+				
+				if (weaponType.compareTo("MeleeWeapon") != 0) {
+					int bullets = oneWeaponStats.nextInt();
+					int cartridges = oneWeaponStats.nextInt();
+					switch(weaponName) {
+						case("Pistol"):
+							w = new Pistol(bullets, cartridges);
+							break;
+						case("Marksman Rifle"):
+							w = new MarksmanRifle(bullets, cartridges);
+							break;
+						case("Shotgun"):
+							w = new Shotgun(bullets, cartridges);
+							break;
+						case("Tactical Rifle"):
+							w = new TacticalRifle(bullets, cartridges);
+							break;
+					}
+				} else { //Load Melee Weapon
+					switch(weaponName) {
+						case("Axe"):
+							w = new Axe();
+							break;
+					}
 				}
-			} else {
-				switch(weaponName) {
-					case("Axe"):
-						setCurrentWeapon(new Axe());
-						break;
-				}
+				w.setDurability(durability);
+				this.weapons.add(w);
+				oneWeaponStats.close();
 			}
-			this.currentWeapon.setDurability(durability);
-			playerStats.close();			
-			currentWeaponStats.close();
+			setCurrentWeapon(weapons.get(0));						
 			scanner.close();
 
 		} catch(FileNotFoundException fnfex) {
@@ -79,31 +74,23 @@ public class Player {
 			this.name = scanner.nextLine();
 			this.level = 1;
 			scanner.close();
-			setCurrentWeapon(new Pistol()); // Default weapon for game start
-			writeStatsToFile(); 
-		} finally {
-			this.weapons.add(currentWeapon);
+			pickUpWeapon(new Pistol()); // Default weapon for game start
+			saveGame(); 
 		}
 	}
 
-	private void writeStatsToFile() {
-		PrintWriter pw = null;
-		try {
-			pw = new PrintWriter("gamestats.txt");
-			pw.write(this.name + "," + this.level);
-			pw.println();
-			pw.write(this.currentWeapon.getClass().getSuperclass().getSimpleName() + "," +
-				     this.currentWeapon.getType() + "," +
-					 this.currentWeapon.getDurability());
-			if (this.currentWeapon.getClass().getSuperclass().getSimpleName().compareTo("Gun") == 0) {
-				pw.write("," + ((Gun)this.currentWeapon).getBulletsAvailable() + "," +
-						((Gun)this.currentWeapon).getCartridgesAvailable());
-			}
-		} catch (IOException e) {
-			//System.out.println(e.getMessage());
-		} finally {
-			pw.close();
+	public void saveGame() throws IOException{
+		PrintWriter pw = new PrintWriter("gamestats.txt");
+		pw.write(this.name + "," + this.level);
+		pw.println();
+		for(Weapon w: this.weapons) {
+			pw.write(w.getClass().getSuperclass().getSimpleName() + "," + w.getType() + "," + w.getDurability());
+			try {
+				pw.write("," + ((Gun)w).getBulletsAvailable() + "," + ((Gun)w).getCartridgesAvailable());
+			} catch (ClassCastException e) { }
+			pw.println();				
 		}
+		pw.close();
 	}
 
 	public Weapon getCurrentWeapon() {
@@ -162,12 +149,13 @@ public class Player {
 		StringBuilder allWeapons = new StringBuilder();
 		this.weapons.forEach((w) -> allWeapons.append("\n\t" + w));
 
-		return "***************" + this.name + "*************\n" +
-				"Current Level: " + this.level + "\n" +
-				"Number of weapons: " + this.weapons.size() + "\n" +
-				"Currently holding: "	+ this.getCurrentWeapon().getType() + "\n" +
-				"Weapons available: " + allWeapons +
-				"\n****************************\n";
+		return String.format("***************" + this.name + "*************\n" +
+							"Current Level: %d\n" +
+							"Number of weapons: %d\n" +
+							"Currently holding: %s\n" +
+							"Weapons available: %s" +
+							"\n****************************\n", 
+							this.level,	this.weapons.size(), this.getCurrentWeapon().getType(), allWeapons);
 	}
 
 }
