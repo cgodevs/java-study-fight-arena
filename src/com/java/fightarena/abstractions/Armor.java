@@ -1,7 +1,9 @@
 package com.java.fightarena.abstractions;
+import java.io.Serializable;
+
 import com.java.fightarena.interfaces.*;
 
-public abstract class Armor implements Deteriorable {
+public abstract class Armor implements Deteriorable, Serializable {
 	public double durability = 100;
 
 	@Override
