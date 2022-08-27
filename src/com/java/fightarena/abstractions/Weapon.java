@@ -9,6 +9,7 @@ import java.io.Serializable;
  */
 
 public abstract class Weapon implements Serializable{
+	private static final long serialVersionUID = 1L;
 	protected String type;
 	protected double durability = 100;	
 	
@@ -32,10 +33,11 @@ public abstract class Weapon implements Serializable{
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (((Weapon) obj).getType().compareTo(this.getType()) == 0) {
-			return true;
-		}
-		return false;
-		
+		return ((Weapon) obj).getType().equals(this.getType());
 	}
+	
+	@Override
+		public int hashCode() {
+			return this.getType().hashCode();
+		}
 }
