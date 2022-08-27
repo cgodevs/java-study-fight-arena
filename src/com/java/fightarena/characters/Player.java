@@ -1,27 +1,25 @@
 package com.java.fightarena.characters;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 import com.java.fightarena.abstractions.*;
 import com.java.fightarena.exceptions.FullSlotsException;
-import com.java.fightarena.weapons.*;
 
 public class Player implements Serializable{
-	public String name;
+	private static final long serialVersionUID = 1L;
+	private String name;
 	private int level;
 	private Weapon currentWeapon; // Either a Gun or Melee Weapon
-	private ArrayList<Weapon> weapons = new ArrayList<>(4); // Only 4 weapons may be carried at a time
+	private Set<Weapon> weapons = new HashSet<Weapon>(4); // Only 4 weapons may be carried at a time
 
 	public Weapon getCurrentWeapon() {
 		return this.currentWeapon;
@@ -32,30 +30,21 @@ public class Player implements Serializable{
 	}
 
 
-	public void pickUpWeapon(Weapon weapon) throws FullSlotsException {
-		
-		if (this.weapons.size() == 0) {
-			System.out.println(this.name + " picked up a " + weapon.getType());
-			this.setCurrentWeapon(weapon);
-			this.weapons.add(weapon);
-			
-		} else if (this.weapons.contains(weapon)) {
+	public void pickUpWeapon(Weapon weapon) {
+		if (this.weapons.add(weapon)){
+			setCurrentWeapon(weapon);
+			System.out.println(this.name + " picked up a " + weapon.getType());	
+		} else {
 			for (Weapon w: this.weapons) {
-				if (w.getType().compareTo(weapon.getType()) == 0) {
+				if (w.equals(weapon)) {
 					try {
-						((Gun) w).reload(((Gun) w).getMagazineSize());						
+						((Gun) w).reload(((Gun) w).getMagazineSize());
 					} catch(ClassCastException e) {
 						((MeleeWeapon) weapon).restore();
 					}			
 					break;
 				}
-			}			
-		} else if (this.weapons.size() == 4) {
-			throw new FullSlotsException("You can't pick up a new weapon. Empty 1 or more slots.");
-		
-		} else {
-			System.out.println(this.name + " picked up a " + weapon.getType());
-			this.weapons.add(weapon);
+			}
 		}
 	}
 
@@ -72,7 +61,7 @@ public class Player implements Serializable{
 	}
 
 	public Player createPlayer() throws IOException {
-		System.out.println("What's your name? -> ");
+		System.out.print("What's your name? -> ");
 		Scanner scanner = new Scanner(System.in);
 		this.name = scanner.nextLine();
 		this.level = 1;
