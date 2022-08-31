@@ -75,7 +75,7 @@ public abstract class Gun extends Weapon implements Comparable<Gun>{
 	}
 	
 	public int compareTo(Gun g){
-		return Integer.compare(this.cartridgesAvailable * this.bulletsAvailable, g.cartridgesAvailable * g.bulletsAvailable) * (-1); //reverse order to present best guns for use top first
+		return Integer.compare(g.cartridgesAvailable * g.bulletsAvailable, this.cartridgesAvailable * this.bulletsAvailable);
 	}
 	@Override
 	public String toString() {
