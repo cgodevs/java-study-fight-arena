@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.java.fightarena.abstractions.*;
 import com.java.fightarena.exceptions.FullSlotsException;
@@ -40,7 +42,7 @@ public class Player implements Serializable{
 					try {
 						((Gun) w).reload(((Gun) w).getMagazineSize());
 					} catch(ClassCastException e) {
-						((MeleeWeapon) weapon).restore();
+						((MeleeWeapon) w).restore();
 					}			
 					break;
 				}
@@ -53,10 +55,34 @@ public class Player implements Serializable{
 			boolean strike = getCurrentWeapon().action();
 			if (strike) {
 				zombie.shotsTaken++;
-			} else { // Out of bullets!
-				System.out.println("You are out of bullets, do you you wish to change weapons?");
-				// Scanner sc = System.in... //TODO implement user input
+			} else { 						// Out of bullets!
+				System.out.print("You are out of bullets. ");
+				if(weapons.size() > 1)
+					switchWeapons();
 			}
+		}
+	}
+
+	public void switchWeapons() {
+		System.out.print("What weapon do you choose? Other weapons available are: ");
+		weapons.stream()
+			.filter(w -> w.getDurability() > 0 && !w.equals(this.currentWeapon))
+			.forEach(w -> System.out.print("[" + w.getType() + "] "));		 // lambda
+		
+		Scanner sc = new Scanner(System.in);
+		String weaponChoice = sc.nextLine();
+		boolean weaponChosen = false;
+		
+		for(Weapon weapon: weapons) {
+			if(weapon.getType().compareTo(weaponChoice) == 0) {
+				setCurrentWeapon(weapon);
+				weaponChosen = true;
+			}				
+		}
+		
+		if(!weaponChosen) {
+			System.out.println("Choice not recognized, did you type in exactly one of the types presented? Let's try again\n");
+			switchWeapons();
 		}
 	}
 
@@ -94,7 +120,7 @@ public class Player implements Serializable{
 							"Currently holding: %s\n" +
 							"Weapons available: %s" +
 							"\n****************************\n", 
-							this.level,	this.weapons.size(), this.getCurrentWeapon().getType(), allWeapons);
+							this.level,	this.weapons.size(), this.getCurrentWeapon(), allWeapons);
 	}
 
 }
