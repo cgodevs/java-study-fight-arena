@@ -10,10 +10,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import com.java.fightarena.abstractions.*;
+import com.java.fightarena.exceptions.CartridgesNotAvailable;
 import com.java.fightarena.exceptions.FullSlotsException;
 
 public class Player implements Serializable{
@@ -56,9 +55,12 @@ public class Player implements Serializable{
 			if (strike) {
 				zombie.shotsTaken++;
 			} else { 						// Out of bullets!
-				System.out.print("You are out of bullets. ");
-				if(weapons.size() > 1)
-					switchWeapons();
+				try {
+					((Gun) currentWeapon).reload();
+				} catch (CartridgesNotAvailable e) {
+					if(weapons.size() > 1)
+						switchWeapons();
+				}				
 			}
 		}
 	}
@@ -78,8 +80,7 @@ public class Player implements Serializable{
 				setCurrentWeapon(weapon);
 				weaponChosen = true;
 			}				
-		}
-		
+		}		
 		if(!weaponChosen) {
 			System.out.println("Choice not recognized, did you type in exactly one of the types presented? Let's try again\n");
 			switchWeapons();
