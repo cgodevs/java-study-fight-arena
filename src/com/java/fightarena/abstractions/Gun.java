@@ -46,7 +46,6 @@ public abstract class Gun extends Weapon implements Comparable<Gun>{
 			this.bulletsAvailable--;			
 			return true;
 		} else {
-			System.out.println("\nNo bullets left in this gun. Shooting not available.\n");
 			return false;
 		}		
 	}
