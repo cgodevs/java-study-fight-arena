@@ -38,7 +38,7 @@ public class FightArena {
 		player.pickUpWeapon(new Axe());
 		player.pickUpWeapon(new MarksmanRifle());		
 		System.out.println(player);							
-		//player.savePlayer("save.bin");				// and test saving them after printing current stats
+		player.savePlayer("save.bin");				// and test saving them after printing current stats
 													// comment everything and rerun try/catch!
 													// keep running to increment cartridges!
 
